@@ -116,7 +116,7 @@ class SignalFiltering(dbc.Card):
              Output('filtered-signal-stats', 'children'),
              Output('filtered-signal-plot', 'style')],
             [Input('apply-filter', 'n_clicks')],
-            [State('original-signal-data', 'data'),
+            [State('raw-signal-data', 'data'),
              State('filter-type', 'value'),
              State('cutoff-freq', 'value'),
              State('cutoff-freq-range', 'value'),
@@ -178,17 +178,16 @@ class SignalFiltering(dbc.Card):
     def __set_up_figure(loaded_signal_data: LoadedSignalData, filtered_signal_data: FilteredSignalData):
         fig = SignalFigure(rows=2, cols=1, subplot_titles=['Time Domain Comparison', 'Frequency Domain Comparison'])
 
-        fig.add_trace(x_data=loaded_signal_data.x_data, y_data=loaded_signal_data.y_data, name='Original Signal',
-                      color='blue', row=1, col=1)
-        fig.add_trace(x_data=loaded_signal_data.x_data, y_data=filtered_signal_data.y_data, name='Filtered Signal',
-                      color='green', row=1, col=1)
+        fig.add_trace(x_data=loaded_signal_data.x_data, y_data=loaded_signal_data.y_data, color='blue', row=1, col=1,
+                      show_legend=True, name='Raw Signal')
+        fig.add_trace(x_data=loaded_signal_data.x_data, y_data=filtered_signal_data.y_data, color='green', row=1, col=1,
+                      show_legend=True, name='Filtered Signal')
         fig.add_trace(x_data=loaded_signal_data.spectral_analyze_result.fft_freq,
-                      y_data=loaded_signal_data.spectral_analyze_result.fft_magnitude, name='Original Spectrum',
-                      color='blue',
-                      row=2, col=1)
+                      y_data=loaded_signal_data.spectral_analyze_result.fft_magnitude, color='blue', row=2, col=1,
+                      show_legend=True, name='Raw Spectrum')
         fig.add_trace(x_data=filtered_signal_data.spectral_analyze_result.fft_freq,
-                      y_data=filtered_signal_data.spectral_analyze_result.fft_magnitude, name='Filtered Spectrum',
-                      color='green', row=2, col=1)
+                      y_data=filtered_signal_data.spectral_analyze_result.fft_magnitude, color='green', row=2, col=1,
+                      show_legend=True, name='Filtered Spectrum')
 
         fig.update_x_axis(title=loaded_signal_data.x_label, row=1, col=1)
         fig.update_x_axis(title='Frequency (Hz)', row=2, col=1)

@@ -17,7 +17,7 @@ class SignalPlot(dbc.Card):
             id=f'{plot_id}-plot',
             style=display_none(),
             children=[
-                dbc.CardHeader(f'{plot_name} Plot'),
+                dbc.CardHeader(f'{plot_name}'),
                 dbc.CardBody(
                     children=[
                         dcc.Loading(
@@ -37,9 +37,9 @@ class SignalPlot(dbc.Card):
 
     def register_callbacks(self, app: Dash) -> 'SignalPlot':
         @app.callback(
-            [Output('original-signal-graph', 'figure'),
-             Output('original-signal-stats', 'children')],
-            Input('original-signal-data', 'data'))
+            [Output('raw-signal-graph', 'figure'),
+             Output('raw-signal-stats', 'children')],
+            Input('raw-signal-data', 'data'))
         def update_graph(data):
             return self.__update_graph(data)
 
@@ -60,11 +60,9 @@ class SignalPlot(dbc.Card):
     def __set_up_figure(signal_data) -> SignalFigure:
         fig = SignalFigure(rows=2, cols=1, subplot_titles=['Time Domain', 'Frequency Domain'])
 
-        fig.add_trace(x_data=signal_data.x_data, y_data=signal_data.y_data, name='Original Signal', color='blue', row=1,
-                      col=1)
+        fig.add_trace(x_data=signal_data.x_data, y_data=signal_data.y_data, color='blue', row=1, col=1)
         fig.add_trace(x_data=signal_data.spectral_analyze_result.fft_freq,
-                      y_data=signal_data.spectral_analyze_result.fft_magnitude, name='Frequency Spectrum',
-                      color='green', row=2, col=1)
+                      y_data=signal_data.spectral_analyze_result.fft_magnitude, color='green', row=2, col=1)
 
         fig.update_x_axis(title=signal_data.x_label, row=1, col=1)
         fig.update_x_axis(title='Frequency (Hz)', row=2, col=1)

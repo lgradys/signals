@@ -18,11 +18,11 @@ class Layout(dbc.Container):
                         DataSource().register_callbacks(app),
                         html.Div(
                             children=[
-                                SignalPlot(plot_id='original-signal').register_callbacks(app),
+                                SignalPlot(plot_id='raw-signal').register_callbacks(app),
                                 SignalFiltering().register_callbacks(app)
                             ]),
                         Footer()],
                     className='dash-container'),
 
-                dcc.Store(id='original-signal-data')],
+                dcc.Store(id='raw-signal-data')],
             fluid=True)

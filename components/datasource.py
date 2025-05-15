@@ -79,9 +79,9 @@ class DataSource(dbc.Card):
             return self.__get_examples(active_tab)
 
         @app.callback(
-            [Output('original-signal-data', 'data'),
+            [Output('raw-signal-data', 'data'),
              Output('upload-output', 'children'),
-             Output('original-signal-plot', 'style'),
+             Output('raw-signal-plot', 'style'),
              Output('signal-filtering', 'style')],
             [Input('upload-data', 'contents'),
              Input('example-dropdown', 'value')],

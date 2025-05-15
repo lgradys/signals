@@ -14,9 +14,10 @@ class SignalFigure:
             vertical_spacing=0.25)
         self.__update_layout()
 
-    def add_trace(self, x_data: np.array, y_data: np.array, name: str, color: str, row: int, col: int):
+    def add_trace(self, x_data: np.array, y_data: np.array, color: str, row: int, col: int, show_legend: bool = False,
+                  name: str = None):
         self.__fig.add_trace(
-            go.Scatter(x=x_data, y=y_data, mode='lines', name=name, line=dict(color=color)),
+            go.Scatter(x=x_data, y=y_data, mode='lines', line=dict(color=color), showlegend=show_legend, name=name),
             row=row,
             col=col)
 
@@ -32,16 +33,12 @@ class SignalFigure:
 
     def __update_layout(self):
         self.__fig.update_layout(
-            height=700,
+            height=800,
             template='plotly_dark',
             showlegend=True,
-            margin=dict(l=80, r=80, t=100, b=80),
-            paper_bgcolor='#1a1a1a',
-            plot_bgcolor='#1a1a1a',
-            font=dict(color='#e0e0e0'),
             legend=dict(
-                orientation='h',
-                yanchor='bottom',
-                y=1,
+                orientation='v',
+                yanchor='middle',
+                y=0.5,
                 xanchor='right',
-                x=1))
+                x=1.2))

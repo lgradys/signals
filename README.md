@@ -1,11 +1,11 @@
 <h1 align="center">Signals processing</h1>
 
-## 📜 Description
+## Description
 
 Dash application for signals processing, available live
 at: [https://lgradys.pythonanywhere.com/](https://lgradys.pythonanywhere.com/).
 
-## 🎯 Features
+## Features
 
 - CSV data import
 - Signal visualization
@@ -13,11 +13,11 @@ at: [https://lgradys.pythonanywhere.com/](https://lgradys.pythonanywhere.com/).
 - Spectral analysis
 - Filter design and implementation
 
-## ✅ Requirements
+## Requirements
 
 - python 3.10
 
-## 🏃‍♂️ Run
+## Run
 
 ```
 pip install -r requirements.txt
